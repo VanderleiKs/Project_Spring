@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.project.spring.entities.Order;
 import com.project.spring.entities.User;
+import com.project.spring.entities.enuns.OrderStatus;
 import com.project.spring.repositories.OrderRepository;
 import com.project.spring.repositories.UserRepository;
 
@@ -29,9 +30,9 @@ public class TestConfig implements CommandLineRunner {
         User u1 = new User(null, "Leonarda pires", "leonarda@gmail.com", "98723456", "23231");
         User u2 = new User(null, "Ana Paula", "ana@htmail.com", "98675990", "67672");
 
-        Order o1 = new Order(null, Instant.parse("2020-06-29T08:23:23Z"), u1);
-        Order o2 = new Order(null, Instant.now(), u2);
-        Order o3 = new Order(null, Instant.now(), u1);
+        Order o1 = new Order(null, Instant.parse("2020-06-29T08:23:23Z"), OrderStatus.PAID, u1);
+        Order o2 = new Order(null, Instant.now(), OrderStatus.WAITING_PAYMENT, u2);
+        Order o3 = new Order(null, Instant.now(), OrderStatus.PAID, u1);
 
         userRepository.saveAll(Arrays.asList(u1, u2));
 

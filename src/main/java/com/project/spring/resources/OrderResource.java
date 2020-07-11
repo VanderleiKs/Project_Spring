@@ -3,9 +3,7 @@ package com.project.spring.resources;
 import java.util.List;
 
 import com.project.spring.entities.Order;
-import com.project.spring.entities.Order;
 import com.project.spring.services.OrderService;
-import com.project.spring.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
