@@ -14,7 +14,7 @@ import com.project.spring.entities.pk.OrderItemPk;
 public class OrderItem implements Serializable{
      private static final long serialVersionUID = 1L;
 
-     @EmbeddedId
+    @EmbeddedId
     private OrderItemPk id = new OrderItemPk();
 
     private Integer quantity;
