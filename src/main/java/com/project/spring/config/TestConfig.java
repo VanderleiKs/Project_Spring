@@ -6,6 +6,7 @@ import java.util.Arrays;
 import com.project.spring.entities.Category;
 import com.project.spring.entities.Order;
 import com.project.spring.entities.OrderItem;
+import com.project.spring.entities.Payment;
 import com.project.spring.entities.Product;
 import com.project.spring.entities.User;
 import com.project.spring.entities.enuns.OrderStatus;
@@ -77,6 +78,10 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4= new OrderItem(o2, p1, 4, p1.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+        Payment pay1 = new Payment(null, Instant.now(), o1);
+        o1.setPayment(pay1);
+        OrderRepository.save(o1);
 
     }
     
