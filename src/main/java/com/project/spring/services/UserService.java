@@ -3,6 +3,8 @@ package com.project.spring.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import com.project.spring.entities.User;
 import com.project.spring.repositories.UserRepository;
 import com.project.spring.services.exceptions.DatabaseException;
@@ -45,14 +47,24 @@ public class UserService {
     }
 
     public User update(Long id, User obj){
-        User userUpadate = userRepository.getOne(id);
-        updateData(obj, userUpadate);
-        return userRepository.save(userUpadate);
+        try{
+            User userUpadate = userRepository.getOne(id);
+            updateData(obj, userUpadate);
+            return userRepository.save(userUpadate);
+        }
+        catch(EntityNotFoundException ex){
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(User obj, User userUpadate) {
-        userUpadate.setName(obj.getName());
-        userUpadate.setEmail(obj.getEmail());
-        userUpadate.setPhone(obj.getPhone());
+        if(obj.getName() == null || obj.getEmail() == null){
+            throw new DatabaseException("Name and Email not can be empty");
+        }
+        else{
+            userUpadate.setName(obj.getName());
+            userUpadate.setEmail(obj.getEmail());
+            userUpadate.setPhone(obj.getPhone());
+        }
     } 
 }
