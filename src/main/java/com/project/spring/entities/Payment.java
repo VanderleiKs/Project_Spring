@@ -26,6 +26,7 @@ public class Payment implements Serializable{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", timezone = "GMT-3")
     private Instant moment;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Order order;
@@ -55,7 +56,7 @@ public class Payment implements Serializable{
         this.moment = moment;
     }
 
-    @JsonIgnore
+    
     public Order getOrder() {
         return order;
     }

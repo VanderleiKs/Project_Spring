@@ -79,7 +79,7 @@ public class Order implements Serializable{
         }
     }
 
-    public User getUser() {
+    public User getClient() {
         return client;
     }
 
@@ -97,6 +97,14 @@ public class Order implements Serializable{
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Double getTotal(){
+        Double total = 0.0;
+        for(OrderItem i : items){
+            total += i.getSubTotal();
+        }
+        return total;
     }
 
     @Override

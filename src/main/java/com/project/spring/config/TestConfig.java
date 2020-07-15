@@ -51,15 +51,15 @@ public class TestConfig implements CommandLineRunner {
         User u1 = new User(null, "Leonarda pires", "leonarda@gmail.com", "98723456", "23231");
         User u2 = new User(null, "Ana Paula", "ana@htmail.com", "98675990", "67672");
 
-        Order o1 = new Order(null, Instant.parse("2020-06-29T08:23:23Z"), OrderStatus.PAID, u1);
-        Order o2 = new Order(null, Instant.now(), OrderStatus.WAITING_PAYMENT, u2);
-        Order o3 = new Order(null, Instant.now(), OrderStatus.PAID, u1);
-
         Product p1 = new Product(null, "Computador Game", "computador i5", 3100.00, null);
         Product p2 = new Product(null, "O senhor dos Anéis", "Capa dura", 280.00, null);
         Product p3 = new Product(null, "Relogio Digital", "Sensor ao toque", 490.00, null);
 
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        Order o1 = new Order(null, Instant.parse("2020-06-29T08:23:23Z"), OrderStatus.PAID, u1);
+        Order o2 = new Order(null, Instant.now(), OrderStatus.WAITING_PAYMENT, u2);
+        Order o3 = new Order(null, Instant.now(), OrderStatus.PAID, u1);
 
         p1.getCategories().add(c1);
         p2.getCategories().add(c2);
