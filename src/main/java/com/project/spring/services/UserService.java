@@ -5,9 +5,12 @@ import java.util.Optional;
 
 import com.project.spring.entities.User;
 import com.project.spring.repositories.UserRepository;
+import com.project.spring.services.exceptions.DatabaseException;
 import com.project.spring.services.exceptions.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +33,15 @@ public class UserService {
     }
 
     public void delete(Long id){
-        userRepository.deleteById(id);
+        try{
+            userRepository.deleteById(id);
+        }
+        catch(EmptyResultDataAccessException ex){
+            throw new ResourceNotFoundException(id);
+        }
+        catch(DataIntegrityViolationException ex){
+            throw new DatabaseException("Error, exist orders for this client");
+        }
     }
 
     public User update(Long id, User obj){
